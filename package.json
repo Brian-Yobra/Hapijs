@@ -15,7 +15,8 @@
   "type": "commonjs",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js",
+    "dev": "node --watch main.js"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.9"
