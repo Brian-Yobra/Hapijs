@@ -1,0 +1,23 @@
+{
+  "name": "hapi",
+  "version": "1.0.0",
+  "description": "Test for hapi package",
+  "homepage": "https://github.com/Brian-Yobra/Hapijs#readme",
+  "bugs": {
+    "url": "https://github.com/Brian-Yobra/Hapijs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Brian-Yobra/Hapijs.git"
+  },
+  "license": "ISC",
+  "author": "Xeno",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.4.9"
+  }
+}
