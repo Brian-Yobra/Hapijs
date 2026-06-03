@@ -1,23 +1,27 @@
-'use strict';
+import Hapi from '@hapi/hapi';
+import dotenv from 'dotenv';
+import { userRoutes } from './routes/users.js';
 
-const Hapi = require('@hapi/hapi');
+dotenv.config();
 
 const init = async () => {
   const server = Hapi.server({
-    port: 1234,
+    port: process.env.PORT || 1234,
     host: '0.0.0.0',
   });
 
   server.route({
-    method: "GET",
-    path: "/",
+    method: 'GET',
+    path: '/',
     handler: (request, h) => {
       return {
-        status: "Healthy ✅",
-        message: "Environment Complete"
-      }
+        status: 'Healthy ✅',
+        message: 'Environment Complete'
+      };
     },
   });
+
+  server.route(userRoutes);
 
   await server.start();
   console.log('Server running on %s', server.info.uri);
