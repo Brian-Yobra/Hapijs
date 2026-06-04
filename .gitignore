@@ -44,3 +44,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 ehthumbs.db
 Thumbs.db
 
+# Drizzle Config Files
+drizzle/
+drizzle.config.d.ts
+drizzle.config.d.ts.map
+drizzle.config.js
+drizzle.config.js.map
+

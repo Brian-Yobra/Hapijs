@@ -1,19 +1,32 @@
 import Hapi from '@hapi/hapi';
-import dotenv from 'dotenv';
+import * as Inert from '@hapi/inert';
+import * as Vision from '@hapi/vision';
+import * as HapiSwagger from 'hapi-swagger';
+
 import { userRoutes } from './routes/users.js';
 
-dotenv.config();
 
 const init = async () => {
   const server = Hapi.server({
-    port: process.env.PORT || 1234,
+    port: 1234,
     host: '0.0.0.0',
   });
+  const swaggerOptions: HapiSwagger.RegisterOptions = {
+    info: { title: 'My Hapi API Documentation', version: '1.0.0' },
+  };
+  // 1. Register the bare module plugins together
+  await server.register([Inert, Vision]);
+
+  await server.register({
+    plugin: HapiSwagger as Hapi.Plugin<HapiSwagger.RegisterOptions>,
+    options: swaggerOptions,
+  });
+
 
   server.route({
     method: 'GET',
     path: '/',
-    handler: (request, h) => {
+    handler: (_, h) => {
       return {
         status: 'Healthy ✅',
         message: 'Environment Complete'
