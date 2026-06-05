@@ -10,6 +10,10 @@ const init = async () => {
   const server = Hapi.server({
     port: 1234,
     host: '0.0.0.0',
+    debug: {
+      request: ['error'],
+      log: ['error', 'info'],
+    },
   });
   const swaggerOptions: HapiSwagger.RegisterOptions = {
     info: { title: 'My Hapi API Documentation', version: '1.0.0' },
@@ -38,6 +42,12 @@ const init = async () => {
 
   await server.start();
   console.log('Server running on %s', server.info.uri);
+  server.events.on('response', (request) => {
+    const status = request.response instanceof Error
+      ? (request.response as any).output.statusCode
+      : (request.response as Hapi.ResponseObject).statusCode;
+    console.log(`${request.method.toUpperCase()} ${request.path} → ${status}`);
+  });
 };
 
 process.on('unhandledRejection', (err) => {
